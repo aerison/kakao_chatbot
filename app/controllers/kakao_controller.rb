@@ -76,4 +76,11 @@ class KakaoController < ApplicationController
   end
   #add,delete만들고, console에 rails g model user user_key:string chat_room:integer 하고 
   #rake db:migrate
+  
+  def chat_room
+    user=User.find_by(user_key:params[:user_key])
+    user.plus
+    user.save
+    render nothing: true
+  end
 end
