@@ -10,9 +10,19 @@ class KakaoController < ApplicationController
   
   def message
     @user_msg=params[:content]
+    @text = "기본응답"
+    if @user_msg == "menu"
+      @text=["20층","multirestaurant","bab"].sample
+    
+    elsif @user_msg == "lotto"
+      @text=(1..45).to_a.sample(6).sort.to_s
+    
+    elsif @user_msg =="cat"
+      @text=["cheese","mango","nabi"].sample
+    end
 
     @return_msg={
-      :text =>@user_msg
+      :text =>@text
     }
     
     @return_keyboard={
