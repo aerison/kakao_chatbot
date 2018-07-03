@@ -1,4 +1,6 @@
 class KakaoController < ApplicationController
+  require 'parse' #자동으로 helper폴더 안에 있는 parse를 찾아서, 모듈로서 부를 수 있게된다.
+  
   def keyboard
     @keyboard={
       :type => "buttons",						# 이렇게 작성해도
@@ -18,12 +20,8 @@ class KakaoController < ApplicationController
       @text=(1..45).to_a.sample(6).sort.to_s
     
     elsif @user_msg =="cat"
-      #@text=["cheese","mango","nabi"].sample
-      @url="http://thecatapi.com/api/images/get?format=xml&type=jpg"
-      @cat_xml =RestClient.get(@url)
-      @cat_doc  = Nokogiri::XML(@cat_xml)
-      @cat_url = @cat_doc.xpath("//url").text
-      @text = @cat_url
+      @cat_url=Parse::Animal.cat #모듈화로 분리해 낸 부분
+      #@text = @cat_url
     end
 
   #사진없이 글 해쉬만
@@ -32,7 +30,7 @@ class KakaoController < ApplicationController
     }
   #사진까지 있는 해쉬  
     @return_msg_photo={
-        :text =>"나만고양이없어ㅇㅅㅇ",
+        :text =>"나만고양이없어ㅇㅅㅇ..인스턴스화 무슨말....",
         :photo =>{
           :url => @cat_url,
           :width => 720,
