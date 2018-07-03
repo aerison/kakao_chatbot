@@ -60,4 +60,20 @@ class KakaoController < ApplicationController
     
     render json: @result #강제로 사용하기
   end
+  
+  def friend_add
+    User.create(user_key:params[:user_key],chat_room:0) 
+    #model에 있는 user_key에 파람즈로 받고, chat_room은 0으로 초기화
+    render nothing: true   #render nothing
+  
+  end
+  
+  def friend_delete
+    User.find_by(user_key:params[:user_key]).destroy
+    render nothing: true
+    #find는 id 값, find_by는 칼럼값
+    
+  end
+  #add,delete만들고, console에 rails g model user user_key:string chat_room:integer 하고 
+  #rake db:migrate
 end

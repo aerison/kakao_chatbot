@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   
   get '/keyboard' => 'kakao#keyboard'
   post '/message'=>'kakao#message'
-  
+  post '/friend'=>'kakao#friend_add'
+  delete '/friend/:user_key' =>'kakao#friend_delete'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

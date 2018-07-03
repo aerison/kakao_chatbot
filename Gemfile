@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.4'
 
+gem 'rails_db'
 gem 'rest-client'
 gem 'nokogiri'
 
