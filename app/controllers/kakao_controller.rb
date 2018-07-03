@@ -4,7 +4,7 @@ class KakaoController < ApplicationController
   def keyboard
     @keyboard={
       :type => "buttons",						# 이렇게 작성해도
-      buttons: ["menu", "lotto", "cat"]		 # 요렇게 작성해도 똑같습니다.
+      buttons: ["menu", "lotto", "cat", "movie"]		 # 요렇게 작성해도 똑같습니다.
     }
     
     render json: @keyboard
@@ -20,8 +20,11 @@ class KakaoController < ApplicationController
       @text=(1..45).to_a.sample(6).sort.to_s
     
     elsif @user_msg =="cat"
-      @cat_url=Parse::Animal.cat #모듈화로 분리해 낸 부분
+      @cat_url=Parse::Animal.cat #모듈화로 분리해 낸 부분 new 대신 self
       #@text = @cat_url
+    
+    else
+      @text=Parse::Movie.movie
     end
 
   #사진없이 글 해쉬만
@@ -40,7 +43,7 @@ class KakaoController < ApplicationController
     
     @return_keyboard={
       :type => "buttons",					
-      buttons: ["menu", "lotto", "cat"]		
+      buttons: ["menu", "lotto", "cat", "movie"]		
     }
     
     if @user_msg == "cat"
